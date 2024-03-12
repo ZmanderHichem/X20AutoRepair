@@ -1,0 +1,17 @@
+ 
+  form {
+    display: flex;
+    max-width: 50%;
+    margin: 0 auto;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 8px;
+  }
+   
+  h2{
+    color: white;
+position: center;  
+margin-top: 80px;
+}
