@@ -1,26 +1,22 @@
+
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import {  onSnapshot, collection, getDocs } from 'firebase/firestore';
-import { firestore } from '../../Firebase/configFirebase';
+import { Link } from 'react-router-dom';
+import { getDocs, collection } from 'firebase/firestore';
+import { firestore } from '../Firebase/configFirebase';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel, Container } from 'react-bootstrap';
-import { getAuth } from 'firebase/auth';
-import ContentContainer from '../../ContentContainer/ContentContainer';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged  } from 'firebase/auth';
+import ContentContainer from "../ContentContainer/ContentContainer";
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
-
-const storage = getStorage();
+// import ContentContainer from "../ContentContainer/ContentContainer";
 const auth = getAuth();
 
 
 
-const Fok = () => {
-  const [promos, setPromos] = useState([]);
+const Home = () => {
+
   const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [user, setUser] = useState(null);
@@ -28,14 +24,8 @@ const [redirectTo, setRedirectTo] = useState(null);
 const [userRole, setUserRole] = useState(null);
 const storage = getStorage();
 
-const [showChat, setShowChat] = useState(false);
 
-const toggleChat = () => {
-  setShowChat(!showChat);
-};
-
-
-const userEmail = email;
+  const [promos, setPromos] = useState([]);
 
   useEffect(() => {
     const fetchPromos = async () => {
@@ -56,7 +46,6 @@ const userEmail = email;
     }
   };
 
-
   const [offresEmploi, setOffresEmploi] = useState([]);
 
   useEffect(() => {
@@ -74,44 +63,14 @@ const userEmail = email;
     };
 
     fetchOffresEmploi();
-  }, []);
-
-
-  const messagesCollectionRef = collection(firestore, 'messages');
-
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const messagesCollectionRef = collection(firestore, 'messages');
-        const messagesSnapshot = await getDocs(messagesCollectionRef);
-        const messagesData = messagesSnapshot.docs.map((doc) => doc.data());
-        setMessages(messagesData);
-      } catch (error) {
-        console.error('Error fetching messages:', error);
-      }
-    };
-
-    fetchMessages();
-  }, []);
-
-
-
-  useEffect(() => {
-    const messagesCollectionRef = collection(firestore, 'messages');
-    const unsubscribe = onSnapshot(messagesCollectionRef, (snapshot) => {
-      const messagesData = snapshot.docs.map((doc) => doc.data());
-      setMessages(messagesData);
-    });
+  }, []);  return (
+   
+      <div>
+        <ContentContainer promos={promos} offresEmploi={offresEmploi} />
+      </div>
+    );
+  };
   
-    return () => unsubscribe();
-  }, []);
 
-  return (
-    <>
 
-       </>
-  );
-};
-export default Fok;
+export default Home;

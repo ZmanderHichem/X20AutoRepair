@@ -1,0 +1,95 @@
+/* Register.css */
+
+.register-formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+  }
+  
+  .register-formWrapper {
+        background-color: #f1f1f1;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 400px; /* Ajustez la largeur du formulaire selon vos préférences */
+    text-align: center; /* Centre les éléments du formulaire */
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    align-items: center; /* Centre les champs dans le formulaire */
+  }
+    
+  
+  .register-input {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 130%; /* Utilisez 100% pour remplir la largeur du conteneur parent */
+    font-size: 18px; /* Ajustez la taille de la police selon vos préférences */
+  }
+  
+  .immatriculation-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centre les éléments horizontalement dans le conteneur immatriculation */
+    margin-bottom: 20px;
+  }
+  
+  .immatriculation-container input {
+    width: 100%; /* Utilisez 100% pour remplir la largeur du conteneur parent */
+  }
+  
+  .immatriculation-container h5 {
+    margin: 0 15px;
+    font-size: 20px;
+  }
+  
+  .immatriculation-type-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .immatriculation-type-container label {
+    margin-right: 20px;
+    font-size: 18px; /* Ajustez la taille du texte selon vos préférences */
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px; /* Ajustez la taille de la police selon vos préférences */
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+  }
+  
+  span.error {
+    color: red;
+    margin-top: 15px;
+  }
+  
+  p {
+    margin-top: 25px;
+  }
+  

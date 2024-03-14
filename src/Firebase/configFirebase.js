@@ -1,9 +1,9 @@
 // configFirebase.js
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signOut  } from 'firebase/auth';
-import { getFirestore, db } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';  // Import the storage service
-import { getDatabase } from 'firebase/database';
+import { getFirestore } from 'firebase/firestore'; // Importer getFirestore pour Firestore
+import { getStorage } from 'firebase/storage';  
+import { getDatabase } from 'firebase/database'; // Importer getDatabase pour la base de données en temps réel
 
 const firebaseConfig = {  
   apiKey: "AIzaSyCEIoKiPIgYaV0wHC4Tltx_XQPzypBib18",
@@ -15,13 +15,10 @@ const firebaseConfig = {
   measurementId: "G-374R3VK3VR"
 };
 
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const firestore = getFirestore(app);
-export const storage = getStorage(app);  // Export the storage service
+const firestore = getFirestore(app); // Utiliser getFirestore pour Firestore
+const storage = getStorage(app);
+const database = getDatabase(app); // Utiliser getDatabase pour la base de données en temps réel
 
-const database = getDatabase(app);
-
-export { auth,  getFirestore, firestore, database, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail,
-  signOut, };
+export { auth, firestore, database, storage, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signOut };

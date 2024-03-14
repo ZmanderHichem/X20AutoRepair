@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink, Link, useNavigate } fr
 import Navbar from "./Navbar/Navbar";
 import NavbarHook from "./NavbarHook/NavbarHook";
 import AdminNavBarHook from "./NavbarHook/Admin/AdminNavbarHook";
+import UserNavBarHook from "./NavbarHook/UserNavBarHook/UserNavBarHook";
 import Home from "./pages/Home";
 import News from "./pages/News";
 import Login from "./pages/Login/Login";
@@ -15,9 +16,13 @@ import LesRendezVous from "./EspaceAdmin/Pages/LesRendezVous/LesRendezVous";
 import HomeUser from "./EspaceUser/HomeUser/HomeUser";
 import MesInterventions from"./EspaceUser/Intervention/MesInterventions";
 import IndexHome from "./IndexHome/IndexHome";
-
+import AjouterService from "./EspaceAdmin/Pages/AjouterService/AjouterService";
+import LesInterventions from "./EspaceAdmin/Pages/LesInterventions/LesInterventions";
+import Promos from "./EspaceAdmin/Pages/Promos/Promos";
+import OffreEmploi from "./EspaceAdmin/Pages/Emploi/OffreEmploi";
 import { AuthContextProvider, useAuth } from "./IndexHome/AuthContext";
-
+import Profile from "./EspaceAdmin/Pages/Profile/Profile";
+import HomeAdmin from "./EspaceAdmin/Pages/HomeAdmin/HomeAdmin";
 const App = () => {
   return (
     <Router>
@@ -29,7 +34,7 @@ const App = () => {
 };
 
 const AppContent = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, isAdmin } = useAuth();
 
   // if (currentUser === null) {
   //   navigate('/');
@@ -38,7 +43,9 @@ const AppContent = () => {
 
   return (
     <>
-      {currentUser ? <AdminNavBarHook /> : <NavbarHook />}
+      {/* {currentUser && !isAdmin ? <UserNavBarHook /> : <AdminNavBarHook />} */}
+       {currentUser && isAdmin ? <AdminNavBarHook /> : currentUser ? <UserNavBarHook /> : <NavbarHook />} 
+
       <main className="main-content">
         <Routes>
       <Route path="/" element={<IndexHome />} />
@@ -46,30 +53,21 @@ const AppContent = () => {
       <Route path="/HomeUser" element={<HomeUser />} />
       <Route path="/MesInterventions/:userEmail" element={<MesInterventions />} />
       <Route path="/login" element={<Login />} />
+
       <Route path="/RendezVous" element={<RendezVous />} />
       <Route path="/About" element={<About />} />
       <Route path="/contactUs" element={<ContactUs />} />
       <Route path="register" element={<Register />} />
       <Route path="LesRendezVous" element={<LesRendezVous />} />
-
-
-      
-
-{/* 
-          
-
-private for user
-          
-
-          private for admin
-
+      <Route path="Profile" element={<Profile />} />
+      <Route path="/MesInterventions" element={<MesInterventions />} />
 
           <Route path="/LesInterventions" element={<LesInterventions />} />
           <Route path="/LesRendezVous" element={<LesRendezVous />} />
           <Route path="/promos" element={<Promos />} />
           <Route path="/ajouterService" element={<AjouterService />} />
-         <Route path="/HomeAdmin" element={<HomeAdmin/>} />
-          <Route path="/OffreEmploi" element={<OffreEmploi/>} /> */}
+         <Route path="/HomeAdmin" element={<HomeAdmin/>} /> 
+          <Route path="/OffreEmploi" element={<OffreEmploi/>} /> 
 
           
 </Routes>

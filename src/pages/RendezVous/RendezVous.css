@@ -1,17 +1,31 @@
- 
-  form {
-    display: flex;
-    max-width: 50%;
-    margin: 0 auto;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 8px;
-  }
-   
-  h2{
-    color: white;
-position: center;  
-margin-top: 80px;
+
+
+
+
+
+
+.rendez-vous-page .rendez-vous-form {
+  display: flex;
+  max-width: 50%;
+  margin: 0 auto;
+  flex-direction: column;
+  opacity: 0; /* Initiallement, le formulaire est invisible */
+  transform: translateY(20px); /* Initiallement, le formulaire est décalé vers le bas */
+  transition: opacity 1.5s ease, transform 1.5s ease; /* Ajoutez une transition pour une animation fluide */
+}
+
+.rendez-vous-page label {
+  margin-bottom: 8px;
+}
+
+
+.rendez-vous-page .form-show {
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+.rendez-vous-page h2 {
+  color: white;
+  position: center;  
+  margin-top: 80px;
 }

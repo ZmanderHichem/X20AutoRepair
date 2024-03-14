@@ -1,4 +1,4 @@
-/* .limite-marquee {
+ .limite-marquee {
   background-color: #0a15e3;
   max-height: 40px;
   overflow: hidden;
@@ -75,7 +75,7 @@
 
   .custom-container-wrapper h1 {
     font-size: 30px; 
-  /* }
+  }
 }
   
 @keyframes slideUp {
@@ -85,4 +85,4 @@
   100% {
     transform: translateY(0px);
   }
-}  */
+}  

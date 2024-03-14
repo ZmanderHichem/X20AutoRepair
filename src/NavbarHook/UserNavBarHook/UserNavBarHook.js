@@ -1,18 +1,17 @@
+// UserNavbarHook.jsx
+
 import React, { useState, useEffect } from "react";
-
-import { NavLink, Link, useNavigate } from "react-router-dom";
-import { signOut   } from "../../Firebase/configFirebase";
-import { getAuth} from 'firebase/auth';
-
+import { NavLink, useNavigate } from "react-router-dom";
+import { signOut } from "../../Firebase/configFirebase";
+import { getAuth } from 'firebase/auth';
 import { IoClose, IoMenu } from "react-icons/io5";
 import { useMediaQuery } from "react-responsive";
-import "./AdminNavbarHook.css";
+import "./UserNavbarHook.css";
 import logoImage from "../../assets/images/x20 Logo.png"; // Assurez-vous de remplacer le chemin par le chemin réel de votre image.
-
 
 const auth = getAuth();
 
-const AdminNavbarHook = () => {
+const UserNavbarHook = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: "1150px" });
   const navigate = useNavigate();
@@ -21,11 +20,7 @@ const AdminNavbarHook = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+      setUser(user);
     });
 
     return () => unsubscribe();
@@ -59,67 +54,19 @@ const AdminNavbarHook = () => {
     return (
       <ul className={listClassName}>
         <li>
-          <NavLink
-            to="/AjouterService"
-            className={linkClassName}
-            onClick={closeMobileMenu}
-          >
-            Ajouter Service
-          </NavLink>
+          <NavLink to="/RendezVous" className={linkClassName} onClick={closeMobileMenu}>RendezVous</NavLink>
         </li>
         <li>
-          <NavLink
-            to="/LesRendezVous"
-            className={linkClassName}
-            onClick={closeMobileMenu}
-          >
-            Les Rendez-Vous
-          </NavLink>
+          <NavLink to="/ContactUs" className={linkClassName} onClick={closeMobileMenu}>ContactUs</NavLink>
         </li>
         <li>
-          <NavLink
-            to="/LesInterventions"
-            className={linkClassName}
-            onClick={closeMobileMenu}
-          >
-            Interventions
-          </NavLink>
+          <NavLink to="/MesInterventions" className={linkClassName} onClick={closeMobileMenu}>Mes Interventions</NavLink>
         </li>
         <li>
-          <NavLink
-            to="/Promos"
-            className={linkClassName}
-            onClick={closeMobileMenu}
-          >
-            Promos
-          </NavLink>
-        </li>
-        {/* <li>
-          <NavLink
-            to="/OffreEmploi"
-            className={linkClassName}
-            onClick={closeMobileMenu}
-          >
-            Offre Emploi
-          </NavLink>
-        </li> */}
-        <li>
-          <NavLink
-            to="/Profile"
-            className={`${linkClassName} `}
-            onClick={closeMobileMenu}
-          >
-            {user ? "Profil" : "Login"}
-          </NavLink>
+          <NavLink to="/Profile" className={`${linkClassName} `} onClick={closeMobileMenu}>{user ? "Profil" : "Login"}</NavLink>
         </li>
         <li>
-          <NavLink
-            to="/"
-            className={`${linkClassName} ${buttonClassName}`}
-            onClick={handleSignOut}
-          >
-            Logout
-          </NavLink>
+          <NavLink to="/Logout" className={`${linkClassName} ${buttonClassName}`} onClick={handleSignOut}>Logout</NavLink>
         </li>
       </ul>
     );
@@ -139,10 +86,7 @@ const AdminNavbarHook = () => {
         )}
 
         {isMobile ? (
-          <div
-            className={`nav__menu  ${isMenuOpen ? "show-menu" : ""}`}
-            id="nav-menu"
-          >
+          <div className={`nav__menu  ${isMenuOpen ? "show-menu" : ""}`} id="nav-menu">
             {renderNavLinks()}
             <div className="nav__close" id="nav-close" onClick={toggleMenu}>
               <IoClose />
@@ -156,4 +100,4 @@ const AdminNavbarHook = () => {
   );
 };
 
-export default AdminNavbarHook;
+export default UserNavbarHook;

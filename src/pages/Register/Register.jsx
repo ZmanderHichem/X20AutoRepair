@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, storage } from "../../Firebase/configFirebase";
+import { auth, db, storage } from "../../Firebase/configFirebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { useNavigate, Link } from "react-router-dom";
 
+import "./Register.css"; // Import the CSS file
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [immatriculationPart1, setImmatriculationPart1] = useState("");
+  const [immatriculationPart2, setImmatriculationPart2] = useState("");
+  const [selectedImmatriculationType, setSelectedImmatriculationType] = useState("TU"); // Default type is TU
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,62 +26,106 @@ const Register = () => {
       // Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      // Create a unique image name
-      const date = new Date().getTime();
-      // const storageRef = ref(storage, `${displayName + date}`);
+      // Determine immatriculation prefix based on user selection
+      let immatriculationPrefix = "";
+      let immatriculation = "";
 
-      // Uncomment the following lines when you want to upload a file
-      // const file = e.target[4].files[0];
-      // await uploadBytesResumable(storageRef, file);
-      // const downloadURL = await getDownloadURL(storageRef);
+      if (selectedImmatriculationType === "RS") {
+        immatriculationPrefix = "RS";
+        immatriculation = immatriculationPrefix + immatriculationPart1;
+      } else if (selectedImmatriculationType === "TU") {
+        immatriculationPrefix = "TU";
+        immatriculation = immatriculationPrefix + immatriculationPart1 + immatriculationPart2;
+      }
 
-      // Update profile
-      await updateProfile(res.user, {
-        displayName,
-        // photoURL: downloadURL,
-      });
-
-      // Create user on Firestore
+      // Create user on firestore
       await setDoc(doc(getFirestore(), "users", res.user.uid), {
         uid: res.user.uid,
         Téléphone,
         displayName,
         email,
-        // photoURL: downloadURL,
+        immatriculation,
       });
 
-      // Create empty user chats on Firestore on your own types of components related to your site
-      // await setDoc(doc(getFirestore(), "userChats", res.user.uid), {});
-      navigate("/");
-    } catch (err) {
-      console.error("Firebase Authentication Error:", err.code, err.message);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error creating user:", error);
       setErr(true);
       setLoading(false);
     }
   };
 
   return (
-    <div className="formContainer">
-      <div className="formWrapper">
-        <span className="logo">Lama Chat</span>
+    <div className="register-container">
+      <div className="register-formWrapper">
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
           <input required type="text" placeholder="display name" />
           <input required type="tel" placeholder="Téléphone" />
           <input required type="email" placeholder="email" />
           <input required type="password" placeholder="password" />
-          {/* Uncomment the following lines when you want to upload a file */}
-          {/* <input required style={{ display: "none" }} type="file" id="file" />
-          <label htmlFor="file">
-            <img src={Add} alt="" />
-            <span>Aj</span>
-          </label> */}
+
+          <div className="immatriculation-container">
+            <input
+              required
+              type="text"
+              maxLength={selectedImmatriculationType === "RS" ? 6 : (selectedImmatriculationType === "Autre" ? 12 : 3)}
+              placeholder={`Immatriculation  (${selectedImmatriculationType})`}
+              value={immatriculationPart1}
+              onChange={(e) => setImmatriculationPart1(e.target.value.replace(/\D/, ""))}
+            />
+            {selectedImmatriculationType === "TU" && (
+              <>
+                <h5 style={{ color: "orange" }}>TU</h5>
+                <input
+                  required
+                  type="text"
+                  maxLength={4} // Set max length to 4 for both RS and TU
+                  placeholder={`Immatriculation `}
+                  value={immatriculationPart2}
+                  onChange={(e) => setImmatriculationPart2(e.target.value.replace(/\D/, ""))}
+                />
+              </>
+            )}
+          </div>
+
+          <div className="immatriculation-type-container">
+            <label>
+              <input
+                type="radio"
+                value="TU"
+                checked={selectedImmatriculationType === "TU"}
+                onChange={() => setSelectedImmatriculationType("TU")}
+              />
+              TU
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="RS"
+                checked={selectedImmatriculationType === "RS"}
+                onChange={() => setSelectedImmatriculationType("RS")}
+              />
+              RS
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="Autre"
+                maxLength={12}
+                checked={selectedImmatriculationType === "Autre"}
+                onChange={() => setSelectedImmatriculationType("Autre")}
+              />
+              Autre
+            </label>
+          </div>
+
           <button disabled={loading}>Sign up</button>
-          {loading && "Please wait..."}
+          {loading && "Uploading and compressing the image please wait..."}
           {err && <span>Something went wrong</span>}
         </form>
         <p>
-          Already have an account? <Link to="/login">Login</Link>
+          You do have an account? <Link to="/register">Login</Link>
         </p>
       </div>
     </div>

@@ -1,24 +1,103 @@
+/* contactUs.css */
 
-  .contact-section {
-    margin-left: 100px;
-    margin-top: 70px;
-    display: flex;
-    height: 100px;
-  }
-  
-  .contact-info {
-    flex: 1;
-    padding: 10px;
-  }
-  
-  .contact-image {
-    margin-right: 100px;
-    flex: 1;
-  }
-  .location{
-    margin-left: auto;
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
-    margin-top: 330px;
+.page-container {
+  position: relative;
+  min-height: 100%;
+}
+
+.contact-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 50px 0; /* Ajustez les marges selon vos préférences */
+}
+
+.contact-info {
+  flex: 1;
+  padding: 10px;
+  margin-left: 10%; /* Ajustez la marge selon vos préférences */
+  font-size: 40px; /* Ajustez la taille de la police selon vos préférences */
+  color: white;
+  animation: slideInFromLeft 1s ease-out; /* Appliquez l'animation */
+}
+
+.contact-image {
+  flex: 1;
+  margin-right: 10%; /* Ajustez la marge selon vos préférences */
+  max-width: 50%; /* La largeur maximale de l'image est définie à 100% du conteneur parent */
+  height: auto; /* Permet à la hauteur de l'image de s'ajuster automatiquement en fonction de la largeur */
+  animation: slideInFromRight 1s ease-out; /* Appliquez l'animation */
+}
+.social-media-icons {
+  display: flex;
+  justify-content: space-evenly; /* Espacement équitable entre les icônes */
+  align-items: center; /* Centrer verticalement */
+  margin-top: 20px; /* Ajustez selon vos besoins */
+  animation: fadeInFromBottom 1s ease-out; /* Appliquez l'animation */
+}
+
+.social-media-icons img {
+  margin-right: 20px;
+  width: 50px; /* Ajustez la taille des icônes selon vos besoins */
+  height: auto;
+  animation: slideInFromBottom 1s ease-out; /* Appliquez l'animation */
+}
+.social-media-icons img {
+  margin-right: 20px;
+}
+
+.location {
+  color: antiquewhite;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto; /* Ajout de cette ligne pour centrer horizontalement */
+  text-align: center; /* Centrer le texte à l'intérieur */
+  margin-top: 50px; /* Ajustez selon vos besoins */
+}
+
+/* Animation CSS */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
   }
-  /* Ajoutez d'autres styles selon vos besoins */
-  
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInFromBottom {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

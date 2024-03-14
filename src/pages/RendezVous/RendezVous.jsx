@@ -1,5 +1,5 @@
 // Import statements
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
 import './RendezVous.css';
@@ -13,6 +13,7 @@ const RendezVous = () => {
   const [modeleVoiture, setModeleVoiture] = useState('');
   const [immatriculation, setImmatriculation] = useState('');
   const [kilometrage, setKilometrage] = useState('');
+  const [service, setService] = useState('');
   const [dateTime, setDateTime] = useState(''); // Updated state for date and time
   const [telephone, setTelephone] = useState('');
   const [email, setEmail] = useState('');
@@ -41,6 +42,7 @@ const RendezVous = () => {
       modeleVoiture,
       immatriculation,
       kilometrage,
+      service,
       dateTime,
       telephone,
       email
@@ -72,6 +74,7 @@ const RendezVous = () => {
       modeleVoiture,
       immatriculation,
       kilometrage,
+      service,
       dateTime,
       telephone,
       email,
@@ -82,16 +85,28 @@ const RendezVous = () => {
     setModeleVoiture('');
     setImmatriculation('');
     setKilometrage('');
+    setService('');
     setDateTime('');
     setTelephone('');
     setEmail('');
   };
 
+  // Add a useEffect to apply the animation class when the component mounts
+  useEffect(() => {
+    const formElement = document.querySelector('.rendez-vous-form');
+    if (formElement) {
+      formElement.classList.add('form-show');
+    }
+  }, []);
+
   // JSX content
   return (
+    
     <div>
+          <div className="rendez-vous-page">
+
       <h2>Prenez un Rendez-vous</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="rendez-vous-form" onSubmit={handleSubmit}>
         <label>Nom:</label>
         <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} />
 
@@ -103,6 +118,9 @@ const RendezVous = () => {
 
         <label>Kilométrage actuel:</label>
         <input type="text" value={kilometrage} onChange={(e) => setKilometrage(e.target.value)} />
+
+        <label>Service Demandé:</label>
+        <input type="text" value={service} onChange={(e) => setService(e.target.value)} />
 
         <label>Date et heure:</label>
         <input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
@@ -116,6 +134,8 @@ const RendezVous = () => {
         <button type="submit">Prendre un Rendez-vous</button>
       </form>
     </div>
+    </div>
+
   );
 };
 

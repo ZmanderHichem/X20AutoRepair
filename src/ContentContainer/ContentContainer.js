@@ -50,8 +50,7 @@ const ContentContainer = ({ promos, offresEmploi }) => {
           ))}
         </Carousel>
 
-        <img src={experience} alt="experience" style={{ maxWidth: 'auto', height: 'auto', margin: '20px auto' }} />
-        <img src={affiche2} alt="affiche2" style={{ maxWidth: 'auto', height: 'auto', margin: '20px auto' }} />
+        <img src={experience} alt="experience" style={{ maxWidth: '100%', height: 'auto', margin: '20px auto' }} />
 
         {/* Your existing code for offresEmploi */}
       <h2>Rejoignez Notre Equipe</h2>
