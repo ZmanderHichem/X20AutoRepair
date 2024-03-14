@@ -5,11 +5,11 @@
 /.pnp
 .pnp.js
 
-.json.package-lock.json
-.package.json
-package-lock.json
-package.json
-g
+<<<<<<< HEAD
+
+=======
+# testing
+>>>>>>> a7c5b5401f684b853ffe950a2ffd44d99b5ea39f
 /coverage
 
 # production
