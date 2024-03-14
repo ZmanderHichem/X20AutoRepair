@@ -10,7 +10,7 @@ const IndexHome = () => {
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user && userEmail) {
+      if (user ) {
         // User is logged in and userEmail is defined
         const isAdmin = user.email.endsWith('@bosch.com');
         if (isAdmin) {
@@ -26,7 +26,7 @@ const IndexHome = () => {
     });
 
     return () => unsubscribe();
-  }, [navigate, userEmail]); // Ajout de userEmail comme dépendance
+  }, [navigate]); // Ajout de userEmail comme dépendance
 
   // Cette composante peut ne rien retourner de spécifique puisque la navigation est gérée dans la logique ci-dessus
   return null;

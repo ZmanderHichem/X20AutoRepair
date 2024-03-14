@@ -33,3 +33,30 @@
   p:hover {
     background-color: #f0f0f0;
   } */
+
+  /* .formContainer.custom {
+    margin: 10% auto;
+    max-width: 400px;
+    background-color: white;
+
+    padding: 20px 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+ 
+  } */
+
+  .formWrapper.custom {
+    background-color: #dcd9d9;
+    margin-top: 5% !important;
+    padding: 5%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Ajustez la largeur du formulaire selon vos préférences */
+    max-width: 600px; /* Limitez la largeur maximale pour assurer une lisibilité sur de grands écrans */
+    margin: 0 auto; /* Centre le formulaire horizontalement */
+    text-align: center; /* Centre les éléments du formulaire */
+  }

@@ -23,6 +23,7 @@ import OffreEmploi from "./EspaceAdmin/Pages/Emploi/OffreEmploi";
 import { AuthContextProvider, useAuth } from "./IndexHome/AuthContext";
 import Profile from "./EspaceAdmin/Pages/Profile/Profile";
 import HomeAdmin from "./EspaceAdmin/Pages/HomeAdmin/HomeAdmin";
+
 const App = () => {
   return (
     <Router>
@@ -36,21 +37,23 @@ const App = () => {
 const AppContent = () => {
   const { currentUser, isAdmin } = useAuth();
 
-  // if (currentUser === null) {
-  //   navigate('/');
-  //   return null;
-  // }
+  console.log("currentUser:", currentUser);
+  console.log("isAdmin:", isAdmin);
+
+ 
 
   return (
     <>
-      {/* {currentUser && !isAdmin ? <UserNavBarHook /> : <AdminNavBarHook />} */}
-       {currentUser && isAdmin ? <AdminNavBarHook /> : currentUser ? <UserNavBarHook /> : <NavbarHook />} 
-
+      {/* {currentUser && !isAdmin ? <UserNavBarHook /> : < />} */}
+      {currentUser && isAdmin ? < AdminNavBarHook/> : currentUser ? <UserNavBarHook /> : <NavbarHook />}
+      
       <main className="main-content">
         <Routes>
       <Route path="/" element={<IndexHome />} />
       <Route path="/Home" element={<Home/>} />
       <Route path="/HomeUser" element={<HomeUser />} />
+      <Route path="/HomeAdmin" element={<HomeAdmin/>} /> 
+
       <Route path="/MesInterventions/:userEmail" element={<MesInterventions />} />
       <Route path="/login" element={<Login />} />
 
@@ -66,7 +69,6 @@ const AppContent = () => {
           <Route path="/LesRendezVous" element={<LesRendezVous />} />
           <Route path="/promos" element={<Promos />} />
           <Route path="/ajouterService" element={<AjouterService />} />
-         <Route path="/HomeAdmin" element={<HomeAdmin/>} /> 
           <Route path="/OffreEmploi" element={<OffreEmploi/>} /> 
 
           

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, doc, setDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, doc, setDoc, getDocs, getDoc } from 'firebase/firestore';
 import { firestore } from '../../../Firebase/configFirebase';
 
 const AjouterService = () => {
@@ -116,6 +116,12 @@ const AjouterService = () => {
       } else {
         // Gérer les autres champs
         updatedServices[index][name] = value;
+        console.log(`Immatriculation saisie: ${value}`); // Ajout du console.log
+        if (name === 'immatriculation') {
+          // Ajouter le code pour récupérer les données et mettre à jour nomProprietaire et email
+          console.log('Immatriculation modifiée:', value);
+          // Ici, vous pouvez appeler une fonction pour récupérer les données de firestore
+        }
       }
   
       return updatedServices;
@@ -144,12 +150,11 @@ const AjouterService = () => {
             <label htmlFor={`immatriculation${index}`}>Immatriculation :</label>
             <input
               type="text"
-              name="immatriculation"
+              name="immatriculation" // Assurez-vous que le name correspond à la clé de l'état
               value={service.immatriculation}
-              onChange={(e) => handleServiceChange(e, index)}
+              onChange={(e) => handleServiceChange(e, index)} // Assurez-vous de passer l'index correctement
               required
             /><br />
-
 
             <label htmlFor={`nomProprietaire${index}`}>Nom du propriétaire :</label>
             <input

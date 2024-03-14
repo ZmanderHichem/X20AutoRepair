@@ -37,43 +37,38 @@ const Login = () => {
   };
 
   const getUserRole = async (userId) => {
+    // Obtenez une référence à la base de données Firestore
     const db = getFirestore();
-
+  
     try {
-      console.log('Fetching user document for user ID:', userId);
+      // Essayez de récupérer le document utilisateur dans la collection des administrateurs
       const userDocAdmin = await getDoc(doc(db, 'admins', userId));
-
+  
+      // Vérifiez si le document utilisateur existe dans la collection des administrateurs
       if (userDocAdmin.exists()) {
-        console.log('User document found in admins collection:', userDocAdmin.data());
+        // Si l'utilisateur est trouvé dans la collection des administrateurs, retournez 'admin'
         return 'admin';
       }
-
+  
+      // Si l'utilisateur n'est pas un admin, vérifiez s'il existe dans la collection des utilisateurs normaux
       const userRef = doc(firestore, 'users', userId);
-
-      try {
-        const userDoc = await getDoc(userRef);
-
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          const userEmail = userData.email;
-
-          // Utilisez userEmail comme nécessaire...
-
-          return userEmail;
-        } else {
-          console.error('User document not found in Firestore for user ID:', userId);
-          return null;
-        }
-      } catch (error) {
-        console.error('Error getting user role:', error.message);
+      const userDoc = await getDoc(userRef);
+  
+      // Vérifiez si le document utilisateur existe dans la collection des utilisateurs normaux
+      if (userDoc.exists()) {
+        // Si l'utilisateur est trouvé dans la collection des utilisateurs, retournez 'normal'
+        return 'normal';
+      } else {
+        // Si le document utilisateur n'est trouvé dans aucune des collections, affichez une erreur
+        console.error('User document not found in Firestore for user ID:', userId);
         return null;
       }
     } catch (error) {
-      console.error('Error fetching user document in admins collection:', error.message);
+      // En cas d'erreur lors de la récupération du rôle de l'utilisateur, affichez une erreur
+      console.error('Error getting user role:', error.message);
       return null;
     }
   };
-
 
   const handleResetPassword = async () => {
     try {
