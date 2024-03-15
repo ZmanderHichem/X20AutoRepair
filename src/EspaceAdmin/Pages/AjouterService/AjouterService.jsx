@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getFirestore, collection, doc, setDoc, getDocs, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, setDoc, getDocs } from 'firebase/firestore';
 import { firestore } from '../../../Firebase/configFirebase';
 
 const AjouterService = () => {
@@ -61,6 +61,8 @@ const AjouterService = () => {
     console.log('Fonction ajouterService() appelée.');
 
     const dernierService = services[services.length - 1];
+    console.log("Dernier service:", dernierService);
+
     for (const key in dernierService) {
       if (Array.isArray(dernierService[key]) && dernierService[key].length === 0) {
         alert('Veuillez sélectionner au moins un service pour le service en cours avant d\'ajouter un nouveau service.');
@@ -71,8 +73,13 @@ const AjouterService = () => {
       }
     }
 
+    console.log('Tous les champs du dernier service sont remplis.');
+
     const servicesCollection = collection(firestore, 'services');
+    console.log("Collection de services:", servicesCollection);
+
     const newServiceRef = doc(servicesCollection);
+    console.log("Nouvelle référence de service:", newServiceRef);
 
     await setDoc(newServiceRef, {
       immatriculation: dernierService.immatriculation,
@@ -116,12 +123,6 @@ const AjouterService = () => {
       } else {
         // Gérer les autres champs
         updatedServices[index][name] = value;
-        console.log(`Immatriculation saisie: ${value}`); // Ajout du console.log
-        if (name === 'immatriculation') {
-          // Ajouter le code pour récupérer les données et mettre à jour nomProprietaire et email
-          console.log('Immatriculation modifiée:', value);
-          // Ici, vous pouvez appeler une fonction pour récupérer les données de firestore
-        }
       }
   
       return updatedServices;
@@ -139,6 +140,7 @@ const AjouterService = () => {
       dateRealisation: '',
     }]);
   };
+
 
   return (
     <div>

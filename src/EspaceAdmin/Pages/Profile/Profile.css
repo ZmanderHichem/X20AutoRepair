@@ -1,18 +1,21 @@
-.formWrapper {
+.formWrapper-Profile {
     margin: 0 auto;
-    max-width: 400px;
+    max-width: 600px;
+    width: 70%!important;
     background-color: white;
     padding: 20px 10px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    align-items: center;
+    gap: 10px;  
+      align-items: center;
+
   }
   
   .title {
     color: #5d5b8d;
     font-size: 15px;
+    
   }
   
   form {
@@ -21,26 +24,40 @@
     gap: 15px;
   }
   
-  input {
+  /* .Profileinput {
     padding: 5px;
+    max-width: 500px;
+    align-items: center;
+
     border: none;
     margin: 0 auto;
-    width: 110%;
+    width: 190%;
+    
     border-bottom: 1px solid #a7bcff;
-  }
+  } */
   
   input::placeholder {
     color: rgb(175, 175, 175);
   }
   
-  button {
-    margin: 0 auto;
+  .formWrapper-Profile .profileButton {
+    margin-top: 10px;
+    display: flex;
+    font-size: 15px;
+justify-content: space-around;
+align-items: center;
+gap: 20px;  
+  
+
     background-color: #7b96ec;
+    width: 80%;
     color: white;
     padding: 10px;
     font-weight: bold;
     border: none;
     cursor: pointer;
+    align-items: center;
+text-align: center;
   }
   
   label {
