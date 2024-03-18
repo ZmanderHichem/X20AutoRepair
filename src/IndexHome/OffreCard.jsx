@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Card, Button, Modal, Container } from 'react-bootstrap';
+import "./OffreCard.css";
 
 const OffreCard = ({ offre }) => {
   const [showModal, setShowModal] = useState(false);
@@ -25,10 +26,10 @@ const OffreCard = ({ offre }) => {
         <Card.Img variant="top" src={offre.imageUrl} />
         <Card.Body>
           <Card.Title>{offre.title}</Card.Title>
-          <Card.Text>{offre.description}</Card.Text>
-          <Button variant="primary" onClick={handleOpenModal}>
-            Voir détails
-          </Button>
+          {/* <Card.Text>{offre.description}</Card.Text> */}
+          <Button variant="primary" onClick={handleOpenModal} className="details-button">
+  Voir détails
+</Button>
         </Card.Body>
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>

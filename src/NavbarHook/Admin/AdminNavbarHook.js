@@ -4,6 +4,8 @@ import { signOut } from "../../Firebase/configFirebase";
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { IoClose, IoMenu } from "react-icons/io5";
+import { Dropdown } from "react-bootstrap"; // Ajoutez cette importation
+
 import { useMediaQuery } from "react-responsive";
 import "./AdminNavbarHook.css";
 import logoImage from "../../assets/images/x20 Logo.png";
@@ -95,13 +97,19 @@ const AdminNavbarHook = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink
-            to="/Promos"
-            className={linkClassName}
-            onClick={closeMobileMenu}
-          >
-            Promos
-          </NavLink>
+        {/* <NavLink to="/Promos" className="nav__link" onClick={closeMobileMenu}>
+  Promos
+</NavLink> */}
+<Dropdown>
+  <Dropdown.Toggle variant="link" id="dropdown-basic" className="nav__link">
+    Gerer
+  </Dropdown.Toggle>
+  <Dropdown.Menu className="dropdown-menu">
+    <Dropdown.Item href="/Promos" className="dropdown-item">Promos</Dropdown.Item>
+    <Dropdown.Item href="/Gallerie" className="dropdown-item">Gallerie</Dropdown.Item>
+    <Dropdown.Item href="/OffreEmploi" className="dropdown-item">OffreEmploi</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
         </li>
         {/* <li>
           <NavLink

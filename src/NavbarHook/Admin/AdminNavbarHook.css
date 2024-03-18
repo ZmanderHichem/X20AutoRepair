@@ -54,6 +54,7 @@
     font-weight: var(--font-semi-bold);
     transition: color 0.4s;
   }
+
   
   .nav__link:hover {
     color: var(--first-color);
@@ -77,4 +78,32 @@
     list-style-type: none;
     padding: 0;
   }
+
+  .dropdown-menu {
+    background-color: var(--second-color);
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .dropdown-menu.show {
+    display: block;
+  }
+  
+  .dropdown-item {
+    color: black;
+    font-weight: var(--font-semi-bold);
+    padding: 0.5rem 1rem;
+    transition: color 0.4s;
+  }
+  
+  .dropdown-item:hover {
+    color: var(--first-color);
+  }
+  
   

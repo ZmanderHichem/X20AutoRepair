@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { collection, getDocs, deleteDoc, doc, addDoc } from 'firebase/firestore';
 import { firestore, storage } from '../../../Firebase/configFirebase';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import './Gallerie.css'
 
 const Gallery = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -30,7 +33,9 @@ const Gallery = () => {
     setUploadedImage({ id: newDocRef.id, imageURL: downloadURL });
   };
 
-  const handleDeleteImage = async (imageId, imageURL) => {
+  const handleDeleteImage = async (e, imageId, imageURL) => {
+    e.preventDefault(); // Empêche le comportement par défaut du bouton (suppression de la carte et rafraîchissement de la page)
+    
     // Supprimer l'image du stockage Firebase
     const imageRef = ref(storage, imageURL);
     await deleteObject(imageRef);
@@ -38,18 +43,26 @@ const Gallery = () => {
     // Supprimer l'entrée dans la collection Firestore
     const galleryCollection = collection(firestore, 'gallery');
     await deleteDoc(doc(galleryCollection, imageId));
+    
+    // Mettre à jour la liste des images après la suppression
+    const updatedImages = galleryImages.filter(image => image.id !== imageId);
+    setGalleryImages(updatedImages);
   };
 
   return (
     <div>
       <h1>Galerie de photos</h1>
       <input type="file" onChange={handleImageUpload} />
-      <div>
+      <div className="gallery-container d-flex flex-wrap">
         {galleryImages.map(image => (
-          <div key={image.id}>
-            <img src={image.imageURL} alt={`Image ${image.id}`} style={{ width: '200px', height: '200px', objectFit: 'cover' }} />
-            <button onClick={() => handleDeleteImage(image.id, image.imageURL)}>Supprimer</button>
-          </div>
+          <Card key={image.id} style={{ width: '200px', margin: '0.5rem' }}>
+            <Card.Img variant="top" src={image.imageURL} alt={`Image ${image.id}`} />
+            <Card.Body>
+  <Button variant="danger" onClick={(e) => handleDeleteImage(e, image.id, image.imageURL)} className="delete-button">
+    Supprimer
+  </Button>
+</Card.Body>
+          </Card>
         ))}
       </div>
     </div>

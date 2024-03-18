@@ -139,6 +139,9 @@
   max-height: 300px;
   object-fit: cover;
 } */
+
+
+
 .custom-section2 .carousel-item {
   max-height: 200px;
   max-width: 300px; /* Adjust the height as needed */
@@ -148,4 +151,32 @@
   max-height: 100%;
   max-width: 100%;
   width: auto;
+}
+
+.card-img-top {
+  height: 200px; /* Hauteur fixe pour toutes les images */
+  width: 100%; /* Assurer que l'image occupe toute la largeur de la carte */
+  object-fit:cover; /* Redimensionner les images pour qu'elles remplissent le conteneur */
+  object-position: center; 
+  border-color: black;
+}
+
+/* Styles pour les cartes */
+.card {
+  width: 200px;
+  margin: 0.5rem;}
+  .card-body {
+    text-align: center;
+
+  }
+
+.card:hover {
+  transform: scale(1.05); /* Zoom sur la carte au survol */
+}
+
+/* Responsive pour les mobiles */
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 150px; /* Réduire la hauteur pour les mobiles */
+  }
 }

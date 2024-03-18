@@ -1,13 +1,16 @@
 // ContentContainer.jsx
 
 import React, { useEffect, useState } from 'react';
-import { Container, Carousel } from 'react-bootstrap';
+import { Container, Carousel, Card } from 'react-bootstrap';
 import './customcontainer.css'; 
 import OffreCard from '../IndexHome/OffreCard';
 import experience from '../assets/images/+10 Years Experience.jpg';
 import { InView } from 'react-intersection-observer';
 import { collection, getDocs } from 'firebase/firestore';
 import { firestore } from '../Firebase/configFirebase';
+// import Carousel from "react-elastic-carousel";
+import Item from "./Item";
+import "./styles.css";
 
 const ContentContainer = ({ promos, offresEmploi }) => {
   const [photos, setPhotos] = useState([]);
@@ -17,10 +20,17 @@ const ContentContainer = ({ promos, offresEmploi }) => {
       entry.target.classList.add('show');
     }
   }; 
+  // const breakPoints = [
+  //   { width: 1, itemsToShow: 1 },
+  //   { width: 550, itemsToShow: 2 },
+  //   { width: 768, itemsToShow: 3 },
+  //   { width: 1200, itemsToShow: 4 },
+  // ];
 
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
+        
         const photosCollection = collection(firestore, 'gallery');
         const photosSnapshot = await getDocs(photosCollection);
         const photosData = photosSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -32,6 +42,7 @@ const ContentContainer = ({ promos, offresEmploi }) => {
   
     fetchPhotos();
   }, []);
+  
 
   return (
   
@@ -56,27 +67,15 @@ const ContentContainer = ({ promos, offresEmploi }) => {
             </Carousel.Item>
           ))}
         </Carousel>
-        <div className="container custom-section2">
-
-        <Carousel interval={3000} pause={false}>
-      <Carousel.Item>
-        <div className="d-flex">
-          {photos.slice(0, 5).map((photo, index) => (
-            <img key={index} className="img-fluid" src={photo.imageURL} alt={`Photo ${index + 1}`} />
-          ))}
-        </div>
-      </Carousel.Item>
-      <Carousel.Item>
-        <div className="d-flex">
-          {photos.slice(0, 10).map((photo, index) => (
-            <img key={index} className="img-fluid" src={photo.imageURL} alt={`Photo ${index + 6}`} />
-          ))}
-        </div>
-      </Carousel.Item>
-    </Carousel>
-
-        </div>
-
+        <h2>Galerie de Photos</h2>
+        <div className="gallery-container d-flex flex-wrap">
+        {photos.map(image => (
+          <Card key={image.id} style={{ width: '200px', margin: '0.5rem' }}>
+            <Card.Img variant="top" src={image.imageURL} alt={`Image ${image.id}`} />
+         
+          </Card>
+        ))}
+      </div>
         <h2>Rejoignez Notre Equipe</h2>
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
           {offresEmploi.map((offre) => (
@@ -85,8 +84,13 @@ const ContentContainer = ({ promos, offresEmploi }) => {
         </div>
       </div>
     </Container>
+
+
+
+
   );
 };
+
 
 export default ContentContainer;   
      

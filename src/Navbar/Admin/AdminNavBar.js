@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
+import { Dropdown } from "react-bootstrap"; // Ajoutez cette importation
+
 import "./AdminNavbar.css";
 
 const Navbar = () => {
