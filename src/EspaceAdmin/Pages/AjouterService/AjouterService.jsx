@@ -6,7 +6,6 @@ const AjouterService = () => {
   const [services, setServices] = useState([
     {
       immatriculation: '',
-      numChassis: '',
       nomProprietaire: '',
       email: '',
       serviceRealise: [],
@@ -61,8 +60,6 @@ const AjouterService = () => {
     console.log('Fonction ajouterService() appelée.');
 
     const dernierService = services[services.length - 1];
-    console.log("Dernier service:", dernierService);
-
     for (const key in dernierService) {
       if (Array.isArray(dernierService[key]) && dernierService[key].length === 0) {
         alert('Veuillez sélectionner au moins un service pour le service en cours avant d\'ajouter un nouveau service.');
@@ -73,17 +70,11 @@ const AjouterService = () => {
       }
     }
 
-    console.log('Tous les champs du dernier service sont remplis.');
-
     const servicesCollection = collection(firestore, 'services');
-    console.log("Collection de services:", servicesCollection);
-
     const newServiceRef = doc(servicesCollection);
-    console.log("Nouvelle référence de service:", newServiceRef);
 
     await setDoc(newServiceRef, {
       immatriculation: dernierService.immatriculation,
-      numChassis: dernierService.numChassis,
       nomProprietaire: dernierService.nomProprietaire,
       email: dernierService.email,
       serviceRealise: dernierService.serviceRealise.includes('Autre') ? [...dernierService.serviceRealise, autreService] : dernierService.serviceRealise,
@@ -97,7 +88,6 @@ const AjouterService = () => {
       const updatedServices = [...prevServices];
       updatedServices[updatedServices.length - 1] = {
         immatriculation: '',
-        numChassis: '',
         nomProprietaire: '',
         email: '',
         serviceRealise: [],
@@ -133,14 +123,12 @@ const AjouterService = () => {
     // Ajouter un nouveau service vide dans l'état
     setServices([...services, {
       immatriculation: '',
-      numChassis: '',
       nomProprietaire: '',
       email: '',
       serviceRealise: [],
       dateRealisation: '',
     }]);
   };
-
 
   return (
     <div>
@@ -152,11 +140,12 @@ const AjouterService = () => {
             <label htmlFor={`immatriculation${index}`}>Immatriculation :</label>
             <input
               type="text"
-              name="immatriculation" // Assurez-vous que le name correspond à la clé de l'état
+              name="immatriculation"
               value={service.immatriculation}
-              onChange={(e) => handleServiceChange(e, index)} // Assurez-vous de passer l'index correctement
+              onChange={(e) => handleServiceChange(e, index)}
               required
             /><br />
+
 
             <label htmlFor={`nomProprietaire${index}`}>Nom du propriétaire :</label>
             <input

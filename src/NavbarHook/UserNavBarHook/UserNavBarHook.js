@@ -1,26 +1,42 @@
 // UserNavbarHook.jsx
 
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { signOut } from "../../Firebase/configFirebase";
 import { getAuth } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { IoClose, IoMenu } from "react-icons/io5";
 import { useMediaQuery } from "react-responsive";
 import "./UserNavbarHook.css";
 import logoImage from "../../assets/images/x20 Logo.png"; // Assurez-vous de remplacer le chemin par le chemin réel de votre image.
 
 const auth = getAuth();
+const firestore = getFirestore();
 
 const UserNavbarHook = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: "1150px" });
   const navigate = useNavigate();
-
   const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        try {
+          const userDoc = doc(firestore, 'users', user.uid);
+          const userSnapshot = await getDoc(userDoc);
+          if (userSnapshot.exists()) {
+            const userData = userSnapshot.data();
+            setUserName(userData.displayName); // Supposons que le nom de l'utilisateur est stocké dans le champ displayName
+          }
+        } catch (error) {
+          console.error("Erreur lors de la récupération des informations de l'utilisateur :", error.message);
+        }
+      } else {
+        setUser(null);
+      }
     });
 
     return () => unsubscribe();
@@ -63,8 +79,15 @@ const UserNavbarHook = () => {
           <NavLink to="/MesInterventions" className={linkClassName} onClick={closeMobileMenu}>Mes Interventions</NavLink>
         </li>
         <li>
-          <NavLink to="/Profile" className={`${linkClassName} `} onClick={closeMobileMenu}>{user ? "Profil" : "Login"}</NavLink>
+          <NavLink
+            to="/Profile"
+            className={`${linkClassName} `}
+            onClick={closeMobileMenu}
+          >
+            {user ? userName : "Login"}
+          </NavLink>
         </li>
+        
         <li>
           <NavLink to="/Logout" className={`${linkClassName} ${buttonClassName}`} onClick={handleSignOut}>Logout</NavLink>
         </li>

@@ -100,22 +100,25 @@ const Login = () => {
   return (
     <div>
 
-      <div className="formContainer">
-        <div className="formWrapper">
-          <span className="logo">Connectez-vous</span>
-          <span className="title">Login</span>
+      <div className="formContainer-customLogin">
+        <div className="formWrapper-customLogin">
+          <span className="title-customLogin">Login</span>
           <form onSubmit={handleSubmit}>
             <input
               type="email"
               placeholder="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="Login-input"
+
             />
             <input
               type="password"
               placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="Login-input"
+
             />
             <button>Sign in</button>
             {err && <span>Something went wrong</span>}

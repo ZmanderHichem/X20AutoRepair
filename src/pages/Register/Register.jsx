@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db, storage } from "../../Firebase/configFirebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Firebase/configFirebase";
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 import { useNavigate, Link } from "react-router-dom";
 
-import "./Register.css"; // Import the CSS file
+import "./Register.css"; 
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,8 +33,8 @@ const Register = () => {
         immatriculationPrefix = "RS";
         immatriculation = immatriculationPrefix + immatriculationPart1;
       } else if (selectedImmatriculationType === "TU") {
-        immatriculationPrefix = "TU";
-        immatriculation = immatriculationPrefix + immatriculationPart1 + immatriculationPart2;
+        immatriculationPrefix = immatriculationPart1 + "TU" + immatriculationPart2;
+        immatriculation = immatriculationPrefix;
       }
 
       // Create user on firestore
@@ -58,32 +57,36 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="register-formWrapper">
-        <span className="title">Register</span>
+        <span className="title-customLogin">Register</span>
         <form onSubmit={handleSubmit}>
-          <input required type="text" placeholder="display name" />
-          <input required type="tel" placeholder="Téléphone" />
-          <input required type="email" placeholder="email" />
-          <input required type="password" placeholder="password" />
+          <input required type="text"      placeholder="Nom & Prénom"   className="Register-input" />
+          <input required type="tel"       placeholder="Téléphone"      className="Register-input" />
+          <input required type="email"     placeholder="Votre Email"    className="Register-input"/>
+          <input required type="password"  placeholder="Mot de Passe "  className="Register-input"/>
 
           <div className="immatriculation-container">
             <input
               required
               type="text"
               maxLength={selectedImmatriculationType === "RS" ? 6 : (selectedImmatriculationType === "Autre" ? 12 : 3)}
-              placeholder={`Immatriculation  (${selectedImmatriculationType})`}
+              placeholder={`Immatriculation     (${selectedImmatriculationType})`}
               value={immatriculationPart1}
               onChange={(e) => setImmatriculationPart1(e.target.value.replace(/\D/, ""))}
+              className="Register-input"
+
             />
             {selectedImmatriculationType === "TU" && (
               <>
-                <h5 style={{ color: "orange" }}>TU</h5>
+                <h5 >TU</h5>
                 <input
                   required
                   type="text"
                   maxLength={4} // Set max length to 4 for both RS and TU
-                  placeholder={`Immatriculation `}
+                  placeholder={`1234 `}
                   value={immatriculationPart2}
                   onChange={(e) => setImmatriculationPart2(e.target.value.replace(/\D/, ""))}
+                  className="Register-input"
+
                 />
               </>
             )}
@@ -96,6 +99,7 @@ const Register = () => {
                 value="TU"
                 checked={selectedImmatriculationType === "TU"}
                 onChange={() => setSelectedImmatriculationType("TU")}
+
               />
               TU
             </label>
@@ -105,6 +109,7 @@ const Register = () => {
                 value="RS"
                 checked={selectedImmatriculationType === "RS"}
                 onChange={() => setSelectedImmatriculationType("RS")}
+
               />
               RS
             </label>
@@ -115,13 +120,14 @@ const Register = () => {
                 maxLength={12}
                 checked={selectedImmatriculationType === "Autre"}
                 onChange={() => setSelectedImmatriculationType("Autre")}
+
               />
               Autre
             </label>
           </div>
 
           <button disabled={loading}>Sign up</button>
-          {loading && "Uploading and compressing the image please wait..."}
+          {loading && "Please wait..."}
           {err && <span>Something went wrong</span>}
         </form>
         <p>

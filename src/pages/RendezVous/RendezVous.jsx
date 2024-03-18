@@ -107,29 +107,31 @@ const RendezVous = () => {
 
       <h2>Prenez un Rendez-vous</h2>
       <form className="rendez-vous-form" onSubmit={handleSubmit}>
-        <label>Nom:</label>
-        <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} />
+        <label className="RV-label">Nom: </label>
+        <input type="text" placeholder="Nom & Prénom*" value={nom} onChange={(e) => setNom(e.target.value)} />
 
-        <label>Modèle de voiture:</label>
-        <input type="text" value={modeleVoiture} onChange={(e) => setModeleVoiture(e.target.value)} />
+        <label className="RV-label">Téléphone:</label>
+        <input type="text" placeholder="Votre Numero de Téléphone*" value={telephone} onChange={(e) => setTelephone(e.target.value)} />
 
-        <label>Immatriculation:</label>
-        <input type="text" value={immatriculation} onChange={(e) => setImmatriculation(e.target.value)} />
+        <label className="RV-label">E-mail:</label>
+        <input type="email" placeholder="Votre E-mail*" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-        <label>Kilométrage actuel:</label>
-        <input type="text" value={kilometrage} onChange={(e) => setKilometrage(e.target.value)} />
+        <label className="RV-label">Modèle de voiture:</label>
+        <input type="text" placeholder="Votre Modèle de voiture* " value={modeleVoiture} onChange={(e) => setModeleVoiture(e.target.value)} />
 
-        <label>Service Demandé:</label>
-        <input type="text" value={service} onChange={(e) => setService(e.target.value)} />
+        <label className="RV-label">Immatriculation:</label>
+        <input type="text" placeholder="Immatriculation de votre Voiture*" value={immatriculation} onChange={(e) => setImmatriculation(e.target.value)} />
 
-        <label>Date et heure:</label>
+        <label className="RV-label">Kilométrage actuel:</label>
+        <input type="text" placeholder="Kilométrage actuel de votre Voiture*" value={kilometrage} onChange={(e) => setKilometrage(e.target.value)} />
+
+        <label className="RV-label">Service Demandé:</label>
+        <input type="text" placeholder="Service Demandé*" value={service} onChange={(e) => setService(e.target.value)} />
+
+        <label className="RV-label">Date et heure:</label>
         <input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
 
-        <label>Téléphone:</label>
-        <input type="text" value={telephone} onChange={(e) => setTelephone(e.target.value)} />
 
-        <label>E-mail:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
         <button type="submit">Prendre un Rendez-vous</button>
       </form>

@@ -109,9 +109,9 @@ const userEmail = email;
   }, []);
 
   return (
-    <>
-
-       </>
+    <div>
+    <ContentContainer promos={promos} offresEmploi={offresEmploi} />
+  </div>
   );
 };
 export default Fok;

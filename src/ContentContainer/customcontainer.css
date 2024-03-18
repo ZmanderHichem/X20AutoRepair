@@ -1,4 +1,4 @@
- .limite-marquee {
+ /* .limite-marquee {
   background-color: #0a15e3;
   max-height: 40px;
   overflow: hidden;
@@ -85,4 +85,67 @@
   100% {
     transform: translateY(0px);
   }
-}  
+}   */
+
+
+
+/* customcontainer.css */
+
+/* .custom-container-wrapper {
+  margin-top: 20px;
+}
+
+.custom-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.custom-par {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.custom-section {
+  margin-top: 40px;
+}
+
+.carousel-item img {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+}
+
+.carousel-caption h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.carousel-caption p {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.custom-gallery-carousel {
+  margin-top: 20px;
+}
+
+.custom-gallery-carousel .carousel-item img {
+  max-height: 300px;
+  object-fit: cover;
+} */
+.custom-section2 .carousel-item {
+  max-height: 200px;
+  max-width: 300px; /* Adjust the height as needed */
+}
+
+.custom-section2 .carousel-item img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+}

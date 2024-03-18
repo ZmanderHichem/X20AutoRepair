@@ -1,19 +1,23 @@
 /* Register.css */
 
-.register-formContainer {
+ /* .register-formContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 90vh;
-  }
+  }  */
   
   .register-formWrapper {
-        background-color: #f1f1f1;
-    padding: 5px;
+    margin: 0  auto 10% auto;
+    max-width: 400px;
+    background-color: white;
+
+    padding: 30px 10px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: 400px; /* Ajustez la largeur du formulaire selon vos préférences */
-    text-align: center; /* Centre les éléments du formulaire */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
   }
   
   .logo {
@@ -21,27 +25,27 @@
     font-weight: bold;
   }
   
-  .title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 15px;
-  }
-  
-  form {
+
+  form     {
+    
     display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    align-items: center; /* Centre les champs dans le formulaire */
-  }
+    width: 100%;
+  flex-direction: column;
+  gap: 15px;
+}
     
   
-  .register-input {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 130%; /* Utilisez 100% pour remplir la largeur du conteneur parent */
-    font-size: 18px; /* Ajustez la taille de la police selon vos préférences */
+  .Register-input
+  {
+    padding: 5px;
+    margin-top: 16px;
+    border: none;
+    margin: 0 auto;
+    width: 90%;
+    border-bottom: 1px solid rgb(116, 116, 240);
+    &::placeholder {
+      color: rgb(161, 154, 154);
+    }
   }
   
   .immatriculation-container {
@@ -49,19 +53,32 @@
     align-items: center;
     justify-content: center; /* Centre les éléments horizontalement dans le conteneur immatriculation */
     margin-bottom: 20px;
+    padding: 0 10px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   
-  .immatriculation-container input {
-    width: 100%; /* Utilisez 100% pour remplir la largeur du conteneur parent */
-  }
+  .immatriculation-container-Register-input {
+    padding: 5px;
+    margin-top: 16px;
+    border: none;
+    margin: 0 auto;
+    width: 90%;
+    border-bottom: 1px solid #ff0026;
+    &::placeholder {
+      color: rgb(255, 0, 0);
+    }  }
   
   .immatriculation-container h5 {
     margin: 0 15px;
     font-size: 20px;
+    color: rgb(120, 120, 243);
   }
   
   .immatriculation-type-container {
     display: flex;
+    justify-content: center; 
+
     margin-bottom: 20px;
   }
   
@@ -79,6 +96,9 @@
     cursor: pointer;
     font-size: 18px; /* Ajustez la taille de la police selon vos préférences */
   }
+
+
+
   
   button:disabled {
     background-color: #ccc;

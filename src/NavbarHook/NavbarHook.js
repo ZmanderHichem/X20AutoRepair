@@ -49,7 +49,7 @@ const NavbarHook = () => {
            ContactUs
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink
             to="/favorite"
             className={linkClassName}
@@ -66,7 +66,7 @@ const NavbarHook = () => {
           >
             Location
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to="/Login"

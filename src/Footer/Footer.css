@@ -1,0 +1,61 @@
+
+#footer {
+    width: 100%;
+    background-color: hsl(246, 93%, 32%);
+  
+}
+
+
+
+footer {
+    width: 100%;
+    height: auto;
+
+    margin: 0 auto;
+}
+
+
+.menufooter {
+    width: 250px;
+    padding-top: 20px;
+    float: left;
+    margin: 20px;
+}
+.menufooter span {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.menufooter ul li {
+
+list-style: none;
+
+border-bottom: solid 1px  white;
+
+padding: 7px;
+}
+
+.menufooter ul a {
+
+    text-decoration: none;
+    color: #b6b6b6;
+    font-size: 14px;
+
+}
+
+.logo {
+    width: 50% !important;
+    max-width:  20px; /* Ajustez la taille selon vos besoins */
+    max-height: 20px; /* Ajustez la taille selon vos besoins */
+    margin-right: 5px; /* Ajoutez une marge à droite pour séparer le logo du texte */
+  }
+
+  .contact-text2 {
+    font-size: 14px; 
+    color: white;/* Ajustez la taille de la police selon vos besoins */
+    display: inline-block; /* Permet d'aligner verticalement le texte avec le logo */
+    vertical-align: middle; /* Alignement vertical au milieu */
+  }

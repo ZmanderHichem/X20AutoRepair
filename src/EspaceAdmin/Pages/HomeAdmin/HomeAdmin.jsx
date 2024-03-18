@@ -6,6 +6,7 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel, Container } from 'react-bootstrap';
 // import './HomeAdmin.css';
+import ContentContainer from "../../../ContentContainer/ContentContainer";
 
 
 
@@ -53,10 +54,9 @@ const HomeAdmin = () => {
   
 
   return (
-    <>
-
-
-    </>
+    <div>
+    <ContentContainer promos={promos} offresEmploi={offresEmploi} />
+  </div>
   );
 };
 

@@ -1,0 +1,29 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .service-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .service-item p {
+    margin: 5px 0;
+  }
+  
+  .service-item .service-realise {
+    font-weight: bold;
+  }
+  
+  .service-item .date-realisation {
+    color: #888;
+  }

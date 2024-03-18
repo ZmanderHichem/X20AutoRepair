@@ -1,61 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
-import { BrowserRouter, Route, Routes, Navigate, useParams  } from 'react-router-dom';
-
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { useAuth } from '../../IndexHome/AuthContext';
 import { firestore } from '../../Firebase/configFirebase';
 
 const MesInterventions = () => {
-  const userEmail = 'papmalik2016@gg.com';
-  const [userInterventions, setUserInterventions] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [services, setServices] = useState([]);
+  const { currentUser } = useAuth(); // Assurez-vous d'avoir une méthode currentUser dans votre AuthContext
 
   useEffect(() => {
-    console.log('User Email in MesInterventions:', userEmail);
+    const fetchServices = async () => {
+      if (currentUser) {
+        // Récupérer les données de l'utilisateur depuis Firestore
+        const userRef = collection(firestore, 'users');
+        const userQuery = query(userRef, where('email', '==', currentUser.email));
+        const userSnapshot = await getDocs(userQuery);
 
-    const fetchUserInterventions = async () => {
-      console.log('Fetching interventions for user with email:', userEmail);
+        if (!userSnapshot.empty) {
+          const userData = userSnapshot.docs[0].data();
+          setUserData(userData);
+          console.log('UserData:', userData); // Vérifiez les données utilisateur dans les logs
 
-      if (userEmail) {
-        const interventionsCollection = collection(firestore, 'services');
-        const interventionsQuery = query(interventionsCollection, where('email', '==', userEmail));
+          // Récupérer les services de l'utilisateur depuis Firestore
+          const servicesCollection = collection(firestore, 'services');
+          const servicesQuery = query(servicesCollection, where('immatriculation', '==', userData.immatriculation));
+          const servicesSnapshot = await getDocs(servicesQuery);
 
-        console.log('Interventions Query:', interventionsQuery);
-
-        try {
-          const interventionsSnapshot = await getDocs(interventionsQuery);
-          console.log('Interventions Snapshot:', interventionsSnapshot);
-
-          const interventionsData = interventionsSnapshot.docs.map(doc => doc.data());
-          console.log('Interventions Data:', interventionsData);
-
-          setUserInterventions(interventionsData);
-        } catch (error) {
-          console.error('Error fetching interventions:', error);
+          const servicesData = servicesSnapshot.docs.map(doc => doc.data());
+          // Tri des services par date décroissante
+          servicesData.sort((a, b) => new Date(b.dateRealisation) - new Date(a.dateRealisation));
+          setServices(servicesData);
+          console.log('ServicesData:', servicesData); 
         }
       }
     };
 
-    fetchUserInterventions();
-  }, [userEmail]);
+    fetchServices();
+  }, [currentUser]);
 
   return (
     <div>
-
-      <h2>Mes Interventions</h2>
-
-      {userInterventions.length > 0 ? (
-        userInterventions.map((intervention, index) => (
-          <div key={index}>
-            <p>Service réalisé : {intervention.serviceRealise}</p>
-            <p>Date du Service : {intervention.dateRealisation}</p>
-            {/* ... Autres détails */}
-            <hr />
-          </div>
-        ))
-      ) : (
-        <p>Aucune intervention trouvée pour cet utilisateur.</p>
-      )}
+      <h1>Vos Services</h1>
+      <div className="formContainer custom">
+        <div className="formWrapper custom"> 
+          {userData && (
+            <div>
+              {services.map((service, index) => (
+                <div key={index}>
+                  <p>Service réalisé : {service.serviceRealise.join(' - ')}</p>
+                  <p>Date du Service : {service.dateRealisation}</p>
+                  {index < services.length - 1 && <hr />}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -23,7 +23,8 @@ import OffreEmploi from "./EspaceAdmin/Pages/Emploi/OffreEmploi";
 import { AuthContextProvider, useAuth } from "./IndexHome/AuthContext";
 import Profile from "./EspaceAdmin/Pages/Profile/Profile";
 import HomeAdmin from "./EspaceAdmin/Pages/HomeAdmin/HomeAdmin";
-
+import Footer from "./Footer/Footer";
+import Gallerie from "./EspaceAdmin/Pages/Gallerie/Gallerie";
 const App = () => {
   return (
     <Router>
@@ -64,6 +65,8 @@ const AppContent = () => {
       <Route path="LesRendezVous" element={<LesRendezVous />} />
       <Route path="Profile" element={<Profile />} />
       <Route path="/MesInterventions" element={<MesInterventions />} />
+      Gallerie
+      <Route path="/Gallerie" element={<Gallerie />} />
 
           <Route path="/LesInterventions" element={<LesInterventions />} />
           <Route path="/LesRendezVous" element={<LesRendezVous />} />
@@ -74,6 +77,7 @@ const AppContent = () => {
           
 </Routes>
       </main>
+      <Footer/>
     </>
   );
 };
